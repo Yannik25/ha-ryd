@@ -17,7 +17,7 @@ async def async_setup(hass: core.HomeAssistant, config: dict) -> bool:
 	url = config_entry.data.get(CONF_URL)
 	email = config_entry.data.get(CONF_EMAIL)
 	password = config_entry.data.get(CONF_PASSWORD)
-	
+
 	data = json.dumps({"email":email,"password":password})
 	# copied from https://github.com/NemoN/ioBroker.ryd/blob/master/io-package.json
 	ryd_api_server = url
@@ -31,21 +31,21 @@ async def async_setup(hass: core.HomeAssistant, config: dict) -> bool:
 	ryd_app_locale = "de-de"
 	ryd_app_internal_name = "TankTaler"
 	ryd_app_platform = "{} [{},{},{}]".format(
-	    client_device_type, client_device_id, client_device_version, client_device_resolution
+		client_device_type, client_device_id, client_device_version, client_device_resolution
 	)
 	ryd_app_user_agent = "{}/{}({};{} {})".format(
-	    ryd_app_internal_name, ryd_app_version, client_device_id, client_device_type, client_device_version
+		ryd_app_internal_name, ryd_app_version, client_device_id, client_device_type, client_device_version
 	)
 	headers = {
-	    'x-txn-platform': ryd_app_platform,
-	    'Cache-Control': 'no-cache, no-store, must-revalidate',
-	    'Pragma': 'no-cache',
-	    'Expires': str(0),
-	    'x-txn-app-version': ryd_app_version,
-	    'User-agent': ryd_app_user_agent,
-	    'X-Txn-Request-Id': str(uuid.uuid4()),
-	    'X-Txn-Locale': ryd_app_locale,
-	    'Content-Type': 'application/json; charset=utf-8',
+		'x-txn-platform': ryd_app_platform,
+		'Cache-Control': 'no-cache, no-store, must-revalidate',
+		'Pragma': 'no-cache',
+		'Expires': str(0),
+		'x-txn-app-version': ryd_app_version,
+		'User-agent': ryd_app_user_agent,
+		'X-Txn-Request-Id': str(uuid.uuid4()),
+		'X-Txn-Locale': ryd_app_locale,
+		'Content-Type': 'application/json; charset=utf-8',
 	}
 	"""
 	print(fueltype)
