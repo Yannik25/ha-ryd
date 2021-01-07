@@ -10,7 +10,7 @@ Also thank you [@nielstron](https://github.com/nielstron) for always correcting 
 
 planned:
   - [ ] put information in seperate sensors or make one general sensor
-  - [ ] add 
+  - [ ] add scan_interval
   - [x] make repo be able to be added to HACS for home-assistant 
   
 ## Installation
