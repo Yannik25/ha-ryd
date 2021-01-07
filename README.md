@@ -20,7 +20,7 @@ Add this repository to [hacs](https://hacs.xyz/) or copy the `custom_component/r
 ## Example configuration
 
 ```yaml
-# Configuration for the BLNET component
+# Configuration for the RYD component
 sensor:
   - platform: ryd
     url: "https://tt4.thinxcloud.de"
