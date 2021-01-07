@@ -13,7 +13,6 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup(hass: core.HomeAssistant, config: dict) -> bool:
     """Set up the RYD Custom Component."""
     # @TODO: Add setup code.
-
 	url = config_entry.data.get(CONF_URL)
 	email = config_entry.data.get(CONF_EMAIL)
 	password = config_entry.data.get(CONF_PASSWORD)
