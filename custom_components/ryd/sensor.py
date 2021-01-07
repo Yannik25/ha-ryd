@@ -35,7 +35,7 @@ def setup_platform(hass: core.HomeAssistant, config: dict, add_devices, discover
 class RydSensor(Entity):
     """Representation of a ryd sensor."""
 
-    def __init__(self, url: str, email: str, password: str):
+    def __init__(self, url: str, email: str, password: str, hass, sensor_id, name):
         # copied from https://github.com/NemoN/ioBroker.ryd/blob/master/io-package.json
         self._ryd_api_server = url
         self._ryd_app_version = "2.52.4(201008000)"
@@ -67,7 +67,6 @@ class RydSensor(Entity):
         }
         self._attributes = {}
         self._identifier = name
-        self.communication = communication
         self._name = name
         self._friendly_name = name
         self._state = None
