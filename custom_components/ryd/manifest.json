@@ -1,0 +1,9 @@
+{
+  "codeowners": ["Yannik Mündler"],
+  "config_flow": false,
+  "dependencies": [],
+  "documentation": "https://github.com/Yannik25/pyryd",
+  "domain": "ryd",
+  "name": "RYD Custom Component",
+  "requirements": []
+}
