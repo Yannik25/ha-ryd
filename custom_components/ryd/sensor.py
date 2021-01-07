@@ -66,6 +66,13 @@ class RydSensor(Entity):
             'Content-Type': 'application/json; charset=utf-8',
         }
         self._attributes = {}
+        self._identifier = name
+        self.communication = communication
+        self._name = name
+        self._friendly_name = name
+        self._state = None
+        self._unit_of_measurement = None
+        self._icon = None
 
     @property
     def state(self):
