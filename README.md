@@ -6,7 +6,7 @@ Still work in progress
 
 lots of information from https://github.com/NemoN/ioBroker.ryd
 
-Also thank you @nielstron for always correcting my mess :)
+Also thank you [@nielstron](https://github.com/nielstron) for always correcting my mess :)
 
 planned:
   - [ ] put information in seperate sensors or make one general sensor
