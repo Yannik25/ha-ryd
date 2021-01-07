@@ -1,5 +1,8 @@
 """Support for RYD sensors."""
 import logging
+import requests
+import json
+import uuid
 from homeassistant import core
 from homeassistant.const import CONF_URL
 from homeassistant.const import CONF_EMAIL
@@ -10,10 +13,7 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup(hass: core.HomeAssistant, config: dict) -> bool:
     """Set up the RYD Custom Component."""
     # @TODO: Add setup code.
-    import requests
-	import json
-	import uuid
-	
+
 	url = config_entry.data.get(CONF_URL)
 	email = config_entry.data.get(CONF_EMAIL)
 	password = config_entry.data.get(CONF_PASSWORD)
@@ -47,12 +47,13 @@ async def async_setup(hass: core.HomeAssistant, config: dict) -> bool:
 	    'X-Txn-Locale': ryd_app_locale,
 	    'Content-Type': 'application/json; charset=utf-8',
 	}
-	
-	#print(fueltype)
-	#print(str(fuel_percentage) + "%")
-	#print(license_plate)
-	#print(str(batteryv) + "," + str(battery_mvoltage-(batteryv*1000)) + "V")
-	#print(str(battery_percentage) + "%")
+	"""
+	print(fueltype)
+	print(str(fuel_percentage) + "%")
+	print(license_plate)
+	print(str(batteryv) + "," + str(battery_mvoltage-(batteryv*1000)) + "V")
+	print(str(battery_percentage) + "%")
+    """
     return True
 
 
@@ -95,4 +96,5 @@ class rydSensor(Entity):
 		level=fuel["level"]
 		obdlevel=level["OBD_FUELLEVEL"]
 		fuel_percentage=obdlevel["percent"]
+		
         self._state =  fuel_percentage
