@@ -124,4 +124,4 @@ class RydSensor(Entity):
         obdlevel=level["OBD_FUELLEVEL"]
         fuel_percentage=obdlevel["percent"]
         """
-        self._state = self._attributes["percent"]
+        self._state = self._attributes["fuelType"]
