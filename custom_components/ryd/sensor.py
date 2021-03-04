@@ -110,18 +110,92 @@ class RydSensor(Entity):
             timeout=2000
         )
         json_data = response.json()
+        
+        """Retrieve and update latest state."""
+        try:
+            values = await self._update()
+        except ConnectionError:
+            if self._available:
+                self._available = False
+                _LOGGER.error("Failed to update: connection error")
+            return
+        except ValueError:
+            _LOGGER.error(
+                "Failed to update: invalid response returned."
+                "Maybe the configured device is not supported"
+            )
+            return
+
+        self._available = True  # reset connection failure
 
         self._attributes = json_data["data"]
-        """
-        data=json_data["data"]
-        fueltype=data["fuelType"]
-        license_plate=data["licensePlate"]
-        battery_mvoltage=data["batteryLevelMV"]
-        battery_percentage=data["batteryLevelPercent"]
-        batteryv=battery_mvoltage/1000
-        fuel=data["fuel"]
-        level=fuel["level"]
-        obdlevel=level["OBD_FUELLEVEL"]
-        fuel_percentage=obdlevel["percent"]
-        """
-        self._state = self._attributes["fuelType"]
+
+        # Add discovered value fields as sensors
+        # because some fields are only sent temporarily
+        new_sensors = []
+        for key in attributes:
+            if key not in self.sensors:
+                self.sensors.add(key)
+                _LOGGER.info("Discovered %s, adding as sensor", key)
+                new_sensors.append(RydTemplateSensor(self, key))
+        self._add_entities(new_sensors, True)
+
+        # Schedule an update for all included sensors
+        for sensor in self._registered_sensors:
+            sensor.async_schedule_update_ha_state(True)
+
+    async def _update(self) -> Dict:
+        """Return values of interest."""
+
+    async def register(self, sensor):
+        """Register child sensor for update subscriptions."""
+        self._registered_sensors.add(sensor)
+
+class RydTemplateSensor(Entity):
+    """Sensor for the single values (e.g. Fuel, Location...)."""
+
+    def __init__(self, parent: RydSensor, name):
+        """Initialize a singular value sensor."""
+        self._name = name
+        self.parent = parent
+        self._state = None
+        self._unit = None
+
+    @property
+    def name(self):
+        """Return the name of the sensor."""
+        return f"{self._name.replace('_', ' ').capitalize()} {self.parent.name}"
+
+    @property
+    def state(self):
+        """Return the current state."""
+        return self._state
+
+    @property
+    def unit_of_measurement(self):
+        """Return the unit of measurement."""
+        return self._unit
+
+    @property
+    def should_poll(self):
+        """Device should not be polled, returns False."""
+        return False
+
+    @property
+    def available(self):
+        """Whether the ryd device is active."""
+        return self.parent.available
+
+    async def async_update(self):
+        """Update the internal state."""
+        state = self.parent.data.get(self._name)
+        self._state = state.get("value")
+        self._unit = state.get("unit")
+
+    async def async_added_to_hass(self):
+        """Register at parent component for updates."""
+        await self.parent.register(self)
+
+    def __hash__(self):
+        """Hash sensor by hashing its name."""
+        return hash(self.name)
