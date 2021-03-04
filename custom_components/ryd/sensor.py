@@ -111,24 +111,8 @@ class RydSensor(Entity):
         )
         json_data = response.json()
         
-        """Retrieve and update latest state."""
-        try:
-            values = await self._update()
-        except ConnectionError:
-            if self._available:
-                self._available = False
-                _LOGGER.error("Failed to update: connection error")
-            return
-        except ValueError:
-            _LOGGER.error(
-                "Failed to update: invalid response returned."
-                "Maybe the configured device is not supported"
-            )
-            return
-
-        self._available = True  # reset connection failure
-
         self._attributes = json_data["data"]
+        attributes = self._attributes
 
         # Add discovered value fields as sensors
         # because some fields are only sent temporarily
@@ -143,9 +127,6 @@ class RydSensor(Entity):
         # Schedule an update for all included sensors
         for sensor in self._registered_sensors:
             sensor.async_schedule_update_ha_state(True)
-
-    async def _update(self) -> Dict:
-        """Return values of interest."""
 
     async def register(self, sensor):
         """Register child sensor for update subscriptions."""
