@@ -2,6 +2,7 @@
   "codeowners": ["Yannik Mündler"],
   "config_flow": false,
   "dependencies": [],
+  "version": "2021.3.4.",
   "documentation": "https://github.com/Yannik25/pyryd",
   "domain": "ryd",
   "name": "RYD Custom Component",
