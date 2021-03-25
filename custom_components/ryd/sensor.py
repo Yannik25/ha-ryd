@@ -36,6 +36,8 @@ def setup_platform(hass: core.HomeAssistant, config: dict, add_devices, discover
     ryd = Ryd(url,email,password)
     ryd_adapter = RydAdapter(ryd, add_devices)
     fetch = lambda: ryd_adapter.update()
+    # call fetch once at beginning of setup
+    fetch()
     track_time_interval(hass, fetch, scan_interval)
     
     return True
