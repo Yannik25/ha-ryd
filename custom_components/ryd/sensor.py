@@ -45,6 +45,8 @@ class RydAdapter(Entity):
     """Representation of a ryd sensor."""
         
     def __init__(self, ryd, add_devices):
+        self._name = "Ryd"
+
         self.ryd = ryd
         self._add_devices = add_devices
         self.values = {}
@@ -112,11 +114,6 @@ class RydTemplateSensor(Entity):
     def should_poll(self):
         """Device should not be polled, returns False."""
         return False
-
-    @property
-    def available(self):
-        """Whether the ryd device is active."""
-        return self.parent.available
 
     async def async_update(self):
         """Update the internal state."""
