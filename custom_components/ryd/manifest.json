@@ -1,10 +1,10 @@
 {
-  "codeowners": ["Yannik Mündler"],
-  "config_flow": false,
-  "dependencies": [],
-  "version": "2021.3.4.",
-  "documentation": "https://github.com/Yannik25/pyryd",
   "domain": "ryd",
-  "name": "RYD Custom Component",
-  "requirements": []
+  "name": "RYD",
+  "documentation": "https://github.com/Yannik25/pyryd/blob/master/README.md",
+  "requirements": [
+    "pyryd==0.1.0"
+  ],
+  "dependencies": [],
+  "codeowners": ["@Yannik25"]
 }
