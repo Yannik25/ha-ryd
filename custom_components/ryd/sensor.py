@@ -49,6 +49,7 @@ class RydAdapter(Entity):
     """Representation of a ryd sensor."""
         
     def __init__(self, ryd, add_devices):
+        # TODO make this the name of the car?
         self._name = "Ryd"
 
         self.ryd = ryd
@@ -56,7 +57,12 @@ class RydAdapter(Entity):
         self.values = {}
         self._sensors = set()
         self._registered_sensors : Set[RydTemplateSensor] = set()
-    
+
+    @property
+    def name(self):
+        """Return the name of the sensor."""
+        return self._name
+
     def update(self):
         """Fetch new state data for the sensor.
         This is the only method that should fetch new data for Home Assistant.
