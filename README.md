@@ -7,11 +7,6 @@ Still work in progress
 Based on the [ioBroker component by @NemoN](https://github.com/NemoN/ioBroker.ryd)
 
 Also thank you [@nielstron](https://github.com/nielstron) for always correcting my mess :)
-
-planned:
-  - [ ] put information in seperate sensors or make one general sensor
-  - [ ] add scan_interval
-  - [x] make component available via HACS
   
 ## Installation
 
@@ -26,6 +21,7 @@ sensor:
     url: https://tt4.thinxcloud.de
     email: your@email.here
     password: your_secret_password_here
+    scan_interval: optional_scan_interval
 ```
 
 The sensors name is `sensor.unnamed_device` (will be fixed)
