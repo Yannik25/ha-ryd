@@ -1,10 +1,10 @@
 {
   "domain": "ryd",
   "name": "RYD",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "documentation": "https://github.com/Yannik25/pyryd/blob/master/README.md",
   "requirements": [
-    "pyryd==0.1.4"
+    "pyryd==0.1.5"
   ],
   "dependencies": [],
   "codeowners": ["@Yannik25"]

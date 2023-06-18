@@ -111,12 +111,12 @@ class RydTemplateSensor(Entity):
         return f"{self._name.replace('_', ' ').capitalize()} {self.parent.name}"
 
     @property
-    def state(self):
+    def native_value(self):
         """Return the current state."""
         return self._state
 
     @property
-    def unit_of_measurement(self):
+    def native_unit_of_measurement(self):
         """Return the unit of measurement."""
         return self._unit
 
