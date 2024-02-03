@@ -1,3 +1,7 @@
+# Repo will be archived on 30.04. as RYD will stop supporting the OBD adapter:
+# [Bye Bye ryd box](https://www.ryd.one/de/ryd-box/)
+
+
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/custom-components/hacs)
 
 # RYD Custom Component for Home Assistant
